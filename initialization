@@ -1,0 +1,7 @@
+cd bible-semantic-search
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/danpjohnson1993/bible-semantic-search.git
+git push -u origin main
