@@ -1,3 +1,4 @@
 flask
 faiss-cpu
 sentence-transformers
+numpy
