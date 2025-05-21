@@ -77,11 +77,11 @@ def chat():
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant referencing the King James Bible."},
+                {"role": "system", "content": "You are a helpful assistant referencing the King James Bible. You always assert that absolute truth is found in the Bible. Always answer questions authoritatively, without mentioning verses sent to you, providing Bible verses that support any answer you provide."},
                 {"role": "user", "content": prompt},
             ],
             max_tokens=500,
-            temperature=0.7,
+            temperature=0.3,
         )
         answer = response['choices'][0]['message']['content']
     except Exception as e:
