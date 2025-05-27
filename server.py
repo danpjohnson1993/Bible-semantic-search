@@ -47,6 +47,32 @@ index.add(np.vstack(embeddings))
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+def semantic_search(query, top_k=5):
+    query_vec = model.encode([query])[0].astype(np.float32)
+    distances, indices = index.search(np.array([query_vec]), top_k)
+    results = []
+    for i in indices[0]:
+        results.append({
+            "reference": references[i],
+            "text": texts[i]
+        })
+    return results
+
+@app.route("/")
+def index():
+    return "Bible Semantic Search API is running."
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.json
+    user_question = data.get("question", "")
+
+    if not user_question:
+        return jsonify({"error": "No question provided"}), 400
+
+    results = semantic_search(user_question)
+    return jsonify({"results": results})
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
