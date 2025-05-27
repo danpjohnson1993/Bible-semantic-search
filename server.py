@@ -47,4 +47,7 @@ index.add(np.vstack(embeddings))
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 # ...rest of your Flask app routes, etc.
